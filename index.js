@@ -6,7 +6,9 @@ const web3 = new Web3("https://rpcapi.fantom.network");
 // http://std-price.d3n.xyz//v1/graphql
 // http://feeder-graphql.bandchain.org/v1/graphql
 
-const network = "mainnet_target_mirror";
+const graphqlURL = "http://feeder-graphql.bandchain.org/v1/graphql";
+
+const network = "fantom_mainnet";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -75,7 +77,7 @@ async function getTxInputTerra(created_at, txHash) {
 }
 
 async function fetchGraphQL(offset) {
-  const result = await fetch("http://std-price.d3n.xyz//v1/graphql", {
+  const result = await fetch(graphqlURL, {
     method: "POST",
     body: JSON.stringify({
       query: `
@@ -103,17 +105,29 @@ const graphqlToJson = async () => {
   let offset = 0;
   let l = 1000;
   let accTxs = [];
-  while (l === 1000) {
+  let currentMonth = "04";
+  let isFuture = true;
+  while (l === 1000 || isFuture) {
+    isFuture = false;
     const rs = await fetchGraphQL(accTxs.length + offset);
     let txs = [];
     for (r of rs) {
       const [a, b] = r["created_at"].split("-");
-      if (a === "2021" && b === "04") {
+      if (Number(b) > Number(currentMonth)) {
+        isFuture = true;
+        offset += 1;
+      }
+      if (a === "2021" && b === currentMonth) {
         txs = [...txs, [r["created_at"].split("T")[0], r["tx_hash"]]];
       }
     }
-    l = txs.length;
-    console.log(accTxs.length, txs[0][0]);
+    if (isFuture) {
+      console.log("future, offset:", offset);
+      l = rs.length;
+    } else {
+      l = txs.length;
+      console.log(accTxs.length, txs[0][0]);
+    }
     accTxs = [...accTxs, ...txs];
     await sleep(500);
   }
@@ -131,14 +145,14 @@ const graphqlToJson = async () => {
 };
 
 (async () => {
-  await graphqlToJson();
-  return;
+  // await graphqlToJson();
+  // return;
 
   const accTxs = JSON.parse(fs.readFileSync(network + "_raw_txs.json"));
 
   let pairs = [];
   // start
-  l = 160000;
+  l = 38000;
   while (true) {
     try {
       console.log("pairs:", l, pairs.length);
@@ -149,7 +163,7 @@ const graphqlToJson = async () => {
 
       const tmp = await Promise.all(
         slice.map(async (e) => {
-          return [e[0], await getTxInputTerra(e[0], e[1])];
+          return [e[0], await getTxInput(e[0], e[1])];
         })
       );
       pairs = [...pairs, ...tmp];
@@ -159,10 +173,10 @@ const graphqlToJson = async () => {
       break;
     }
     await sleep(1000);
-    // if (l % 20_000 === 0) {
-    //   console.log("break if l % 20_000 === 0: ", l);
-    //   break;
-    // }
+    if (l % 2000 === 0) {
+      console.log("break if l % 2000 === 0: ", l);
+      break;
+    }
   }
 
   const a = {};
