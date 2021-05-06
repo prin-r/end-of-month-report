@@ -1,29 +1,8 @@
 const fs = require("fs");
 
-const folder = "fantom_mainnet";
-const header = "fantom_mainnet";
-const mids = [
-  "2000",
-  "4000",
-  "6000",
-  "8000",
-  "10000",
-  "12000",
-  "14000",
-  "16000",
-  "18000",
-  "20000",
-  "22000",
-  "24000",
-  "26000",
-  "28000",
-  "30000",
-  "32000",
-  "34000",
-  "36000",
-  "38000",
-  "38400",
-];
+const folder = "eth_mainnet";
+const header = "mainnet_target_eth_mainnet";
+const mids = ["3000"];
 const tnfs = (() => {
   let acc = [];
   for (const m of mids) {

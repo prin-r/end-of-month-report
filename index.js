@@ -1,14 +1,16 @@
 const fetch = require("node-fetch");
 const fs = require("fs");
 const Web3 = require("web3");
-const web3 = new Web3("https://rpcapi.fantom.network");
+const web3 = new Web3(
+  "https://mainnet.infura.io/v3/8a0f2143b6444ee0a8d0f0414fd533d2"
+);
 
 // http://std-price.d3n.xyz//v1/graphql
 // http://feeder-graphql.bandchain.org/v1/graphql
 
-const graphqlURL = "http://feeder-graphql.bandchain.org/v1/graphql";
+const graphqlURL = "http://std-price.d3n.xyz//v1/graphql";
 
-const network = "fantom_mainnet";
+const network = "mainnet_target_eth_mainnet";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -152,7 +154,7 @@ const graphqlToJson = async () => {
 
   let pairs = [];
   // start
-  l = 38000;
+  l = 0;
   while (true) {
     try {
       console.log("pairs:", l, pairs.length);
@@ -173,10 +175,10 @@ const graphqlToJson = async () => {
       break;
     }
     await sleep(1000);
-    if (l % 2000 === 0) {
-      console.log("break if l % 2000 === 0: ", l);
-      break;
-    }
+    // if (l % 2000 === 0) {
+    //   console.log("break if l % 2000 === 0: ", l);
+    //   break;
+    // }
   }
 
   const a = {};
