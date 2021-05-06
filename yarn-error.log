@@ -1,0 +1,31 @@
+Arguments: 
+  /Users/mumu/.nvm/versions/node/v14.15.0/bin/node /Users/mumu/.yarn/bin/yarn.js add node-fetch
+
+PATH: 
+  /Users/mumu/elrondsdk:/Users/mumu/.local/share/solana/install/active_release/bin:/Users/mumu/.cargo/bin:/Users/mumu/.wasmer/bin:/Users/mumu/.yarn/bin:/Users/mumu/.config/yarn/global/node_modules/.bin:/Users/mumu/.nvm/versions/node/v14.15.0/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/Users/mumu/.local/share/solana/install/active_release/bin:/Users/mumu/.cargo/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/share/dotnet:/usr/local/mysql/bin:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/mumu/Desktop/arcanist/bin/:/Users/mumu/go/bin:/Users/mumu/.wasmer/globals/wapm_packages/.bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin:/Users/mumu/go/bin
+
+Yarn version: 
+  1.22.5
+
+Node version: 
+  14.15.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/mumu/Desktop/node/test/summary_end_of_month/package.json: Unexpected end of JSON input
+      at JSON.parse (<anonymous>)
+      at /Users/mumu/.yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/Users/mumu/.yarn/lib/cli.js:310:30)
+      at /Users/mumu/.yarn/lib/cli.js:321:13
+
+npm manifest: 
+  
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
