@@ -6,9 +6,9 @@ const web3 = new Web3("https://bsc-dataseed.binance.org/");
 // http://std-price.d3n.xyz//v1/graphql
 // http://feeder-graphql.bandchain.org/v1/graphql
 
-const graphqlURL = "http://feeder-graphql.bandchain.org/v1/graphql";
+const graphqlURL = "http://std-price.d3n.xyz//v1/graphql";
 
-const network = "bsc_mainnet";
+const network = "mainnet_target_mirror";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -152,7 +152,7 @@ const graphqlToJson = async () => {
 
   let pairs = [];
   // start
-  l = 0;
+  l = 120000;
   while (true) {
     try {
       console.log("pairs:", l, pairs.length);
@@ -163,7 +163,7 @@ const graphqlToJson = async () => {
 
       const tmp = await Promise.all(
         slice.map(async (e) => {
-          return [e[0], await getTxInput(e[0], e[1])];
+          return [e[0], await getTxInputTerra(e[0], e[1])];
         })
       );
       pairs = [...pairs, ...tmp];
@@ -172,11 +172,11 @@ const graphqlToJson = async () => {
       console.log(e);
       break;
     }
-    await sleep(1000);
-    // if (l % 2000 === 0) {
-    //   console.log("break if l % 2000 === 0: ", l);
-    //   break;
-    // }
+    await sleep(5000);
+    if (l % 30000 === 0) {
+      console.log("break if l % 30000 === 0: ", l);
+      break;
+    }
   }
 
   const a = {};
