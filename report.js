@@ -2,7 +2,7 @@ const fs = require("fs");
 
 const folder = "eth_mainnet";
 const header = "mainnet_target_eth_mainnet";
-const mids = ["3000"];
+const mids = ["7600"];
 const tnfs = (() => {
   let acc = [];
   for (const m of mids) {
