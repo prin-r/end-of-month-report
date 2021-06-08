@@ -6,9 +6,9 @@ const web3 = new Web3("https://bsc-dataseed.binance.org/");
 // http://std-price.d3n.xyz//v1/graphql
 // http://feeder-graphql.bandchain.org/v1/graphql
 
-const graphqlURL = "http://feeder-graphql.bandchain.org/v1/graphql";
+const graphqlURL = "http://std-price.d3n.xyz//v1/graphql";
 
-const network = "bsc_mainnet";
+const network = "mainnet_target_bsc";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -105,7 +105,7 @@ const graphqlToJson = async () => {
   let offset = 0;
   let l = 1000;
   let accTxs = [];
-  let currentMonth = "04";
+  let currentMonth = "05";
   let isFuture = true;
   while (l === 1000 || isFuture) {
     isFuture = false;
@@ -173,10 +173,11 @@ const graphqlToJson = async () => {
       break;
     }
     await sleep(1000);
-    // if (l % 2000 === 0) {
-    //   console.log("break if l % 2000 === 0: ", l);
-    //   break;
-    // }
+    if (l % 12000 === 0) {
+      await sleep(60_000);
+      console.log("sleep 10 if l % 2000 === 0: ", l);
+      // break;
+    }
   }
 
   const a = {};
