@@ -105,7 +105,7 @@ const graphqlToJson = async () => {
   let offset = 0;
   let l = 1000;
   let accTxs = [];
-  let currentMonth = "04";
+  let currentMonth = "05";
   let isFuture = true;
   while (l === 1000 || isFuture) {
     isFuture = false;
@@ -152,7 +152,7 @@ const graphqlToJson = async () => {
 
   let pairs = [];
   // start
-  l = 260000;
+  l = 200000;
   while (true) {
     try {
       console.log("pairs:", l, pairs.length);
@@ -173,8 +173,12 @@ const graphqlToJson = async () => {
       break;
     }
     await sleep(5000);
-    if (l % 20000 === 0) {
-      console.log("break if l % 20000 === 0: ", l);
+    if (l % 10000 === 0) {
+      console.log("sleep if l % 10_000 === 0: ", l);
+      await sleep(2 * 60_000);
+    }
+    if (l % 50000 === 0) {
+      console.log("break if l % 50_000 === 0: ", l);
       break;
     }
   }
