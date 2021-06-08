@@ -25,16 +25,20 @@ function zip(arrays) {
 txNotFound = [];
 
 async function getTxInput(created_at, txHash) {
-  try {
-    const tx = await web3.eth.getTransaction(txHash);
-    const r = web3.eth.abi.decodeParameters(
-      ["string[]", "uint64[]", "uint64[]", "uint64[]"],
-      "0x" + tx["input"].slice(10)
-    );
-    return zip([r["0"], r["1"], r["2"], r["3"]]);
-  } catch (e) {
-    console.log("get: ", txHash, " : fail");
-    txNotFound = [...txNotFound, [created_at, txHash]];
+  for (let i = 0; i < 10; i++) {
+    try {
+      const tx = await web3.eth.getTransaction(txHash);
+      const r = web3.eth.abi.decodeParameters(
+        ["string[]", "uint64[]", "uint64[]", "uint64[]"],
+        "0x" + tx["input"].slice(10)
+      );
+      return zip([r["0"], r["1"], r["2"], r["3"]]);
+    } catch (e) {
+      console.log("get: ", txHash, " : fail");
+      txNotFound = [...txNotFound, [created_at, txHash]];
+    }
+    console.log("retry: ", txHash, " : ", i);
+    await sleep(1000);
   }
   return [];
 }
@@ -107,7 +111,7 @@ const graphqlToJson = async () => {
   let offset = 0;
   let l = 1000;
   let accTxs = [];
-  let currentMonth = "04";
+  let currentMonth = "05";
   let isFuture = true;
   while (l === 1000 || isFuture) {
     isFuture = false;
