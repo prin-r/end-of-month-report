@@ -1,8 +1,8 @@
 const fs = require("fs");
 
 const folder = "bsc_mainnet";
-const header = "bsc_mainnet";
-const mids = ["43700"];
+const header = "mainnet_target_bsc";
+const mids = ["70300"];
 const tnfs = (() => {
   let acc = [];
   for (const m of mids) {
