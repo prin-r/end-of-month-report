@@ -1,8 +1,25 @@
 const fs = require("fs");
 
-const folder = "bsc_mainnet";
-const header = "bsc_mainnet";
-const mids = ["43700"];
+const folder = "mirror_mainnet";
+const header = "mainnet_target_mirror";
+const mids = [
+  "2000",
+  "8000",
+  "20000",
+  "30000",
+  "60000",
+  "90000",
+  "120000",
+  "150000",
+  "180000",
+  "190000",
+  "200000",
+  "210000",
+  "240000",
+  "250000",
+  "260000",
+  "265300",
+];
 const tnfs = (() => {
   let acc = [];
   for (const m of mids) {

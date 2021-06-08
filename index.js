@@ -152,7 +152,7 @@ const graphqlToJson = async () => {
 
   let pairs = [];
   // start
-  l = 120000;
+  l = 260000;
   while (true) {
     try {
       console.log("pairs:", l, pairs.length);
@@ -173,8 +173,8 @@ const graphqlToJson = async () => {
       break;
     }
     await sleep(5000);
-    if (l % 30000 === 0) {
-      console.log("break if l % 30000 === 0: ", l);
+    if (l % 20000 === 0) {
+      console.log("break if l % 20000 === 0: ", l);
       break;
     }
   }
